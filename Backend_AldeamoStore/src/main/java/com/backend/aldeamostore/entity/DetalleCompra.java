@@ -4,6 +4,7 @@
  */
 package com.backend.aldeamostore.entity;
 
+import com.backend.aldeamostore.model.MDetalleCompra;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
@@ -16,10 +17,17 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Juan Carlos Avila Meza / Luz Daleth Lopez Jimenez
  */
+@Data
+@Getter
+@Setter
+
 @Entity
 @Table(name = "tb_detalle_compra", catalog = "db_semillero", schema = "")
 @XmlRootElement
@@ -41,25 +49,32 @@ public class DetalleCompra implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_detalle_compra", nullable = false)
     private Long idDetalleCompra;
+
     @Basic(optional = false)
     @Column(nullable = false)
     private int cantidad;
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal descuento;
+
     @Basic(optional = false)
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal iva;
+
     @Basic(optional = false)
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal monto;
+
     @Basic(optional = false)
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal total;
+
     @Basic(optional = false)
     @Column(name = "compra_id", nullable = false)
     private long compraId;
+
     @Basic(optional = false)
     @Column(name = "producto_id", nullable = false)
     private long productoId;
@@ -82,68 +97,15 @@ public class DetalleCompra implements Serializable {
         this.productoId = productoId;
     }
 
-    public Long getIdDetalleCompra() {
-        return idDetalleCompra;
-    }
-
-    public void setIdDetalleCompra(Long idDetalleCompra) {
-        this.idDetalleCompra = idDetalleCompra;
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public BigDecimal getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(BigDecimal descuento) {
-        this.descuento = descuento;
-    }
-
-    public BigDecimal getIva() {
-        return iva;
-    }
-
-    public void setIva(BigDecimal iva) {
-        this.iva = iva;
-    }
-
-    public BigDecimal getMonto() {
-        return monto;
-    }
-
-    public void setMonto(BigDecimal monto) {
-        this.monto = monto;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    public long getCompraId() {
-        return compraId;
-    }
-
-    public void setCompraId(long compraId) {
-        this.compraId = compraId;
-    }
-
-    public long getProductoId() {
-        return productoId;
-    }
-
-    public void setProductoId(long productoId) {
-        this.productoId = productoId;
+    public DetalleCompra(MDetalleCompra detalleCompra) {
+        this.idDetalleCompra = detalleCompra.getIdDetalleCompra();
+        this.compraId = detalleCompra.getCompraId();
+        this.productoId = detalleCompra.getProductoId();
+        this.cantidad = detalleCompra.getCantidad();
+        this.monto = detalleCompra.getMonto();
+        this.iva = detalleCompra.getIva();
+        this.descuento = detalleCompra.getDescuento();
+        this.total = detalleCompra.getTotal();
     }
 
     @Override
@@ -170,5 +132,5 @@ public class DetalleCompra implements Serializable {
     public String toString() {
         return "com.backend.aldeamostore.entity.DetalleCompra[ idDetalleCompra=" + idDetalleCompra + " ]";
     }
-    
+
 }
