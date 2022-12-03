@@ -27,7 +27,7 @@ public class MRol {
     public MRol(Rol rol) {
         this.rolId = rol.getRolId();
        this.descripcion = rol.getDescripcion();
-        this.status = rol.getStatus();
+        this.status = rol.isStatus();
     }
 
 

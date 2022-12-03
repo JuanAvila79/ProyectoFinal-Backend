@@ -6,6 +6,7 @@ package com.backend.aldeamostore.entity;
 
 import com.backend.aldeamostore.model.MRol;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,12 +15,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Juan Carlos Avila Meza / Luz Daleth Lopez Jimenez
  */
+
+@Data
+@Setter
+@Getter
+
 @Entity
 @Table(name = "tb_rol", catalog = "db_semillero", schema = "")
 @XmlRootElement
@@ -44,7 +54,7 @@ public class Rol implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false)
     private boolean status;
-
+    
     public Rol() {
     }
 
@@ -62,30 +72,6 @@ public class Rol implements Serializable {
         this.rolId = rol.getRolId();
         this.descripcion = rol.getDescripcion();
         this.status = rol.isStatus();
-    }
-
-    public Long getRolId() {
-        return rolId;
-    }
-
-    public void setRolId(Long rolId) {
-        this.rolId = rolId;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 
     @Override

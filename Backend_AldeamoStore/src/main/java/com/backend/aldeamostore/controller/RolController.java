@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/aldeamostore/v1")
+//@CrossOrigin("*")
 @CrossOrigin(origins = "http://localhost:8080")
 public class RolController {
 
@@ -36,8 +37,8 @@ public class RolController {
     private rolService rol_Service;
 
     // Metodo para Listar todos los roles
-    @GetMapping("/rol/listAll")
-    public ResponseEntity< List<MRol>> listAll() {
+    @GetMapping("/rol/list")
+    public ResponseEntity< List<MRol>> list() {
         List<MRol> listRol = rol_Service.listAll();
         ResponseEntity<List<MRol>> reponseEntity = new ResponseEntity<>(listRol, HttpStatus.OK);
         return reponseEntity;
@@ -45,33 +46,37 @@ public class RolController {
 
     // Metodo para crear un rol  
     @PostMapping("/rol/create")
-    public ResponseEntity createUser(@RequestBody MRol rol) {
+    public ResponseEntity create(@RequestBody MRol rol) {
         if (StringUtils.isBlank(rol.getDescripcion())) {
             return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <-- el Campo Descripcion no puede estar Vacio"), HttpStatus.BAD_REQUEST);
         }
-
         if (rol_Service.crear(rol)) {
-            return new ResponseEntity(new Message("Usuario Creado Exitosamente"), HttpStatus.CREATED);
+            return new ResponseEntity(new Message("Rol "+ rol.getDescripcion() +"creado exitosamente..."), HttpStatus.CREATED);
         } else {
-            return new ResponseEntity(new Message("no se ha creado el Rol, este ya existe..."), HttpStatus.CONFLICT);
+            return new ResponseEntity(new Message("Rol no creado, el rol " + rol.getDescripcion() + " ya existe..."), HttpStatus.CONFLICT);
         }
-
     }
 
     // Metodo para actualizar un rol
     @PutMapping("/rol/update/")
-    public ResponseEntity<MRol> updateUser(@RequestBody MRol rol) {
+    public ResponseEntity<MRol> update(@RequestBody MRol rol) {
         if (!rol_Service.findByID(rol.getRolId())) {
             return new ResponseEntity(new Message("El ID No. < " + rol.getRolId() + " > no existe en la base de datos..."), HttpStatus.BAD_REQUEST);
         } else {
-            MRol request_update = rol_Service.update(rol);
-            return new ResponseEntity<MRol>(request_update, HttpStatus.OK);
+            if ((rol.isStatus() != true) && (rol.isStatus() != false)){
+                rol.setStatus(true);
+            }
+            if (rol_Service.update(rol)) {
+                return new ResponseEntity(new Message("Rol actualizado exitosamente..."), HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity(new Message("ha ocurrido un error interno, rol no actualizado.."), HttpStatus.CONFLICT);
+            }
         }
     }
 
-        // Metodo para eliminar un usuario en particular
+    // Metodo para eliminar un usuario en particular
     @DeleteMapping("/rol/delete/{id}")
-    public ResponseEntity< MRol> deleteUser(@PathVariable("id") Long id) {
+    public ResponseEntity< MRol> delete(@PathVariable("id") Long id) {
         if (!rol_Service.findByID(id)) {
             return new ResponseEntity(new Message("Este Id no existe en la base de datos...."), HttpStatus.NOT_FOUND);
         } else {

@@ -34,8 +34,13 @@ public class rolService {
 
     public boolean crear(MRol rol) {
         try {
-            rolRepository.save(rol_Converter.converterModelToEntity(rol));
-            return true;
+            if (rolRepository.findByDescripcion(rol.getDescripcion()) == null) {
+                rol.setStatus(true);
+                rolRepository.save(rol_Converter.converterModelToEntity(rol));
+                return true;
+            }else{
+                return false;
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return false;
@@ -45,30 +50,28 @@ public class rolService {
 
     public boolean existsRol(MRol rol) {
         try {
-            if (rolRepository.findByDescripcion(rol.getDescripcion()).getStatus() == true) {
-                return true;
-            } else {
-                return false;
-            }
+            return rolRepository.findByDescripcion(rol.getDescripcion()).isStatus();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
     }
 
-    public MRol update(MRol rol) {
+    public boolean update(MRol rol) {
         try {
-            Long id = rol.getRolId();
             if (rolRepository.existsById(rol.getRolId())) {
-                Rol model_rol = rolRepository.getReferenceById(id);
+                Rol model_rol = rolRepository.getReferenceById(rol.getRolId());
                 model_rol.setDescripcion(rol.getDescripcion());
                 model_rol.setStatus(rol.isStatus());
                 rolRepository.save(model_rol);
+                return true;
+            }else{
+                return false;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return false;
         }
-        System.out.println(rol);
-        return rol;
     }
 
     public boolean findByID(Long rol) {

@@ -17,23 +17,23 @@ import org.springframework.stereotype.Component;
 public class rolConverter {
 
     public List<MRol> converterList(List<Rol> rol) {
-        List<MRol> modelRol = new ArrayList<>();
-        for (Rol entityRol : rol) {
-            modelRol.add(new MRol(entityRol));
+        List<MRol> model_rol = new ArrayList<>();
+        for (Rol entity_rol : rol) {
+            model_rol.add(new MRol(entity_rol));
         }
-        return modelRol;
+        return model_rol;
     }
 
     public MRol converterEntityToModel(Rol rol) {
-        MRol modelRol = new MRol(rol);
-        return modelRol;
+        MRol model_rol = new MRol(rol);
+        return model_rol;
     }
 
     public Rol converterModelToEntity(MRol rol) {
-        Rol entityRol = new Rol(rol);
-        entityRol.setDescripcion(rol.getDescripcion());
-        entityRol.setStatus(rol.isStatus());
-        return entityRol;
+        Rol entity_rol = new Rol(rol);
+//        entityRol.setDescripcion(rol.getDescripcion());
+//        entityRol.setStatus(rol.isStatus());
+        return entity_rol;
     }
 
 }
