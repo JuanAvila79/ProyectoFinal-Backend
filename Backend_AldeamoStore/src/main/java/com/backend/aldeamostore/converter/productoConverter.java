@@ -17,33 +17,33 @@ import org.springframework.stereotype.Component;
 public class productoConverter {
 
     public List<MProducto> converterList(List<Producto> product) {
-        List<MProducto> modelRol = new ArrayList<>();
-        for (Producto entityProduct : product) {
-            modelRol.add(new MProducto(entityProduct));
+        List<MProducto> model_product = new ArrayList<>();
+        for (Producto entity_product : product) {
+            model_product.add(new MProducto(entity_product));
         }
-        return modelRol;
+        return model_product;
     }
 
     public MProducto converterEntityToModel(Producto producto) {
-        MProducto modeProduct = new MProducto(producto);
-        return modeProduct;
+        MProducto model_product = new MProducto(producto);
+        return model_product;
     }
 
-    public Producto converterModelToEntity(MProducto model_product) {
-        Producto entityProduct = new Producto(model_product);
-        entityProduct.setProductoId(model_product.getProductoId());
-        entityProduct.setCategoriaId(model_product.getCategoriaId());
-        entityProduct.setProveedorId(model_product.getProveedorId());
-        entityProduct.setTitulo(model_product.getTitulo());
-        entityProduct.setNombre(model_product.getNombre());
-        entityProduct.setDescripcion(model_product.getDescripcion());
-        entityProduct.setMarca(model_product.getMarca());
-        entityProduct.setModelo(model_product.getModelo());
-        entityProduct.setPrecio(model_product.getPrecio());
-        entityProduct.setCantidad(model_product.getCantidad());
-        entityProduct.setDescuento(model_product.getDescuento());
-        entityProduct.setStatus(model_product.isStatus());
-        return entityProduct;
+    public Producto converterModelToEntity(MProducto producto) {
+        Producto entity_product = new Producto(producto);
+//        entityProduct.setProductoId(model_product.getProductoId());
+//        entityProduct.setCategoriaId(model_product.getCategoriaId());
+//        entityProduct.setProveedorId(model_product.getProveedorId());
+//        entityProduct.setTitulo(model_product.getTitulo());
+//        entityProduct.setNombre(model_product.getNombre());
+//        entityProduct.setDescripcion(model_product.getDescripcion());
+//        entityProduct.setMarca(model_product.getMarca());
+//        entityProduct.setModelo(model_product.getModelo());
+//        entityProduct.setPrecio(model_product.getPrecio());
+//        entityProduct.setCantidad(model_product.getCantidad());
+//        entityProduct.setDescuento(model_product.getDescuento());
+//        entityProduct.setStatus(model_product.isStatus());
+        return entity_product;
     }
 
 }

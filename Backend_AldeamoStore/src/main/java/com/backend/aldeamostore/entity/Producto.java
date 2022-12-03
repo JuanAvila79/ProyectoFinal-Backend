@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -21,8 +22,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author Juan Carlos Avila Meza / Luz Daleth Lopez Jimenez
+ *
+ * @author Juan Carlos Avila Meza
  */
+
 @Data
 @Getter
 @Setter
@@ -33,36 +36,53 @@ import lombok.Setter;
 @NamedQueries({
     @NamedQuery(name = "Producto.findAll", query = "SELECT p FROM Producto p"),
     @NamedQuery(name = "Producto.findByProductoId", query = "SELECT p FROM Producto p WHERE p.productoId = :productoId"),
-    @NamedQuery(name = "Producto.findByCantidad", query = "SELECT p FROM Producto p WHERE p.cantidad = :cantidad"),
+    @NamedQuery(name = "Producto.findByCategoriaId", query = "SELECT p FROM Producto p WHERE p.categoriaId = :categoriaId"),
+    @NamedQuery(name = "Producto.findByProveedorId", query = "SELECT p FROM Producto p WHERE p.proveedorId = :proveedorId"),
+    @NamedQuery(name = "Producto.findByTitulo", query = "SELECT p FROM Producto p WHERE p.titulo = :titulo"),
+    @NamedQuery(name = "Producto.findByNombre", query = "SELECT p FROM Producto p WHERE p.nombre = :nombre"),
     @NamedQuery(name = "Producto.findByDescripcion", query = "SELECT p FROM Producto p WHERE p.descripcion = :descripcion"),
-    @NamedQuery(name = "Producto.findByDescuento", query = "SELECT p FROM Producto p WHERE p.descuento = :descuento"),
     @NamedQuery(name = "Producto.findByMarca", query = "SELECT p FROM Producto p WHERE p.marca = :marca"),
     @NamedQuery(name = "Producto.findByModelo", query = "SELECT p FROM Producto p WHERE p.modelo = :modelo"),
-    @NamedQuery(name = "Producto.findByNombre", query = "SELECT p FROM Producto p WHERE p.nombre = :nombre"),
     @NamedQuery(name = "Producto.findByPrecio", query = "SELECT p FROM Producto p WHERE p.precio = :precio"),
-    @NamedQuery(name = "Producto.findByStatus", query = "SELECT p FROM Producto p WHERE p.status = :status"),
-    @NamedQuery(name = "Producto.findByTitulo", query = "SELECT p FROM Producto p WHERE p.titulo = :titulo"),
-    @NamedQuery(name = "Producto.findByCategoriaId", query = "SELECT p FROM Producto p WHERE p.categoriaId = :categoriaId"),
-    @NamedQuery(name = "Producto.findByProveedorId", query = "SELECT p FROM Producto p WHERE p.proveedorId = :proveedorId")})
+    @NamedQuery(name = "Producto.findByCantidad", query = "SELECT p FROM Producto p WHERE p.cantidad = :cantidad"),
+    @NamedQuery(name = "Producto.findByDescuento", query = "SELECT p FROM Producto p WHERE p.descuento = :descuento"),
+    @NamedQuery(name = "Producto.findByStatus", query = "SELECT p FROM Producto p WHERE p.status = :status")})
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "producto_id", nullable = false)
+    @Column(name = "PRODUCTO_ID", nullable = false)
     private Long productoId;
     
     @Basic(optional = false)
-    @Column(nullable = false)
-    private int cantidad;
+    @Column(name = "CATEGORIA_ID", nullable = false)
+    private long categoriaId;
+    
+    @Basic(optional = false)
+    @Column(name = "PROVEEDOR_ID", nullable = false)
+    private long proveedorId;
+    
+    @Basic(optional = false)
+    @Column(nullable = false, length = 200)
+    private String titulo;
+    
+    @Basic(optional = false)
+    @Lob
+    @Column(nullable = false, length = 65535)
+    private String image;
+    
+    @Lob
+    @Column(length = 65535)
+    private String images;
+    
+    @Basic(optional = false)
+    @Column(nullable = false, length = 200)
+    private String nombre;
     
     @Column(length = 200)
     private String descripcion;
-    
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(precision = 12, scale = 0)
-    private Float descuento;
     
     @Basic(optional = false)
     @Column(nullable = false, length = 100)
@@ -73,27 +93,20 @@ public class Producto implements Serializable {
     private String modelo;
     
     @Basic(optional = false)
-    @Column(nullable = false, length = 200)
-    private String nombre;
+    @Column(nullable = false)
+    private float precio;
     
-    @Column(precision = 12, scale = 0)
-    private Float precio;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private int cantidad;
+    
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(precision = 12, scale = 3)
+    private Float descuento;
     
     @Basic(optional = false)
     @Column(nullable = false)
     private boolean status;
-    
-    @Basic(optional = false)
-    @Column(nullable = false, length = 200)
-    private String titulo;
-    
-    @Basic(optional = false)
-    @Column(name = "categoria_id", nullable = false)
-    private long categoriaId;
-    
-    @Basic(optional = false)
-    @Column(name = "proveedor_id", nullable = false)
-    private int proveedorId;
 
     public Producto() {
     }
@@ -102,30 +115,39 @@ public class Producto implements Serializable {
         this.productoId = productoId;
     }
 
-    public Producto(Long productoId, int cantidad, String marca, String modelo, String nombre, boolean status, String titulo, long categoriaId, int proveedorId) {
+    public Producto(Long productoId, long categoriaId, long proveedorId, String nombre, String titulo, String image,String images ,String descripcion,int cantidad ,Float descuento,String marca, String modelo, float precio,  boolean status) {
         this.productoId = productoId;
-        this.cantidad = cantidad;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.nombre = nombre;
-        this.status = status;
-        this.titulo = titulo;
         this.categoriaId = categoriaId;
         this.proveedorId = proveedorId;
+        this.nombre = nombre;
+        this.titulo = titulo;
+        this.image = image;
+        this.images = images;
+        this.descripcion = descripcion;
+        this.cantidad = cantidad;      
+        this.descuento = descuento;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.precio = precio;
+        this.status = status;
     }
 
     public Producto(MProducto model_product) {
-       this.productoId = model_product.getProductoId();
-        this.cantidad = model_product.getCantidad();
-        this.marca = model_product.getMarca();
-        this.modelo = model_product.getModelo();
-        this.nombre = model_product.getNombre();
-        this.status = model_product.isStatus();
-        this.titulo = model_product.getTitulo();
+        this.productoId = model_product.getProductoId();
         this.categoriaId = model_product.getCategoriaId();
         this.proveedorId = model_product.getProveedorId();
+        this.nombre = model_product.getNombre();
+        this.titulo = model_product.getTitulo();
+        this.image = model_product.getImage();
+        this.images = model_product.getImages();
+        this.descripcion = model_product.getDescripcion();
+        this.cantidad = model_product.getCantidad();      
+        this.descuento = model_product.getDescuento();
+        this.marca = model_product.getMarca();
+        this.modelo = model_product.getModelo();
+        this.precio = model_product.getPrecio();
+        this.status = model_product.isStatus();
     }
-
     
     @Override
     public int hashCode() {

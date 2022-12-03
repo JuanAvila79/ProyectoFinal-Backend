@@ -18,6 +18,8 @@ import lombok.Setter;
 public class MProducto {
 
     private Long productoId;
+    private long categoriaId;
+    private long proveedorId;
     private int cantidad;
     private String descripcion;
     private Float descuento;
@@ -27,14 +29,33 @@ public class MProducto {
     private Float precio;
     private boolean status;
     private String titulo;
-    private long categoriaId;
-    private int proveedorId;
+    private String image;
+    private String images;
 
     public MProducto() {
     }
 
+    public MProducto(Long productoId, long categoriaId, long proveedorId, int cantidad, String descripcion, Float descuento, String marca, String modelo, String nombre, Float precio, boolean status, String titulo, String image, String images) {
+        this.productoId = productoId;
+        this.categoriaId = categoriaId;
+        this.proveedorId = proveedorId;
+        this.nombre = nombre;
+        this.titulo = titulo;
+        this.image = image;
+        this.images = images;
+        this.descripcion = descripcion;
+        this.cantidad = cantidad;
+        this.descuento = descuento;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.precio = precio;
+        this.status = status;
+    }
+
     public MProducto(Producto producto) {
         this.productoId = producto.getProductoId();
+        this.categoriaId = producto.getCategoriaId();
+        this.proveedorId = producto.getProveedorId();
         this.cantidad = producto.getCantidad();
         this.descripcion = producto.getDescripcion();
         this.descuento = producto.getDescuento();
@@ -44,23 +65,9 @@ public class MProducto {
         this.precio = producto.getPrecio();
         this.status = producto.isStatus();
         this.titulo = producto.getTitulo();
-        this.categoriaId = producto.getCategoriaId();
-        this.proveedorId = producto.getProveedorId();
-    }
+        this.image = producto.getImage();
+        this.images = producto.getImages();
 
-    public MProducto(Long productoId, int cantidad, String descripcion, Float descuento, String marca, String modelo, String nombre, Float precio, boolean status, String titulo, long categoriaId, int proveedorId) {
-        this.productoId = productoId;
-        this.cantidad = cantidad;
-        this.descripcion = descripcion;
-        this.descuento = descuento;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.status = status;
-        this.titulo = titulo;
-        this.categoriaId = categoriaId;
-        this.proveedorId = proveedorId;
     }
-
+    
 }
