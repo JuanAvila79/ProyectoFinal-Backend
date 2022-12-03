@@ -17,21 +17,21 @@ import org.springframework.stereotype.Component;
 public class userConverter {
 
     public List<MUser> converterList(List<User> usuario) {
-        List<MUser> modelUser = new ArrayList<>();
-        for (User entityUser : usuario) {
-            modelUser.add(new MUser(entityUser));
+        List<MUser> model_user = new ArrayList<>();
+        for (User entity_user : usuario) {
+            model_user.add(new MUser(entity_user));
         }
-        return modelUser;
+        return model_user;
     }
 
     public MUser converterEntityToModel(User usuario){
-        MUser modelUser = new MUser(usuario);
-        return modelUser;
+        MUser model_user = new MUser(usuario);
+        return model_user;
     }
     
     public User converterModelToEntity(MUser usuaro){
-        User entityUser = new User(usuaro);
-        return entityUser;
+        User entity_user = new User(usuaro);
+        return entity_user;
     }
     
     

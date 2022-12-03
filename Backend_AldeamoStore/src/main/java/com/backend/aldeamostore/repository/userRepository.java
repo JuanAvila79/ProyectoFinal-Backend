@@ -15,9 +15,10 @@ import org.springframework.stereotype.Repository;
 @Repository("UserRepository")
 public interface userRepository extends JpaRepository<User, Long> {
 
-    public abstract boolean existsByEmail(String Email);
-
+    @Override
     public abstract Optional<User> findById(Long userId);
+
+    public abstract boolean existsByEmail(String Email);
 
     public abstract User findByEmail(String email);
 

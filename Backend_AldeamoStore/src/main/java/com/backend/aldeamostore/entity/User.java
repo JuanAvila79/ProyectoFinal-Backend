@@ -6,7 +6,6 @@ package com.backend.aldeamostore.entity;
 
 import com.backend.aldeamostore.model.MUser;
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -77,7 +76,7 @@ public class User implements Serializable {
     private String countryCode;
 
     @Basic(optional = false)
-    @Column(name = "date_create", nullable = false, columnDefinition = " TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name = "date_create",nullable = false, columnDefinition = " TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateCreate;
 
@@ -101,7 +100,7 @@ public class User implements Serializable {
     private boolean status;
 
     @Column(name = "rol_id")
-    private BigInteger rolId;
+    private Long rolId;
 
     public User() {
     }
@@ -110,7 +109,7 @@ public class User implements Serializable {
         this.userId = userId;
     }
 
-    public User(Long userId, String nombres, String apellidos, String celular, String countryCode, Date dateCreate, int edad, String email, String passwords, String photourl, boolean status, BigInteger rolId) {
+    public User(Long userId, String nombres, String apellidos, String celular, String countryCode, Date dateCreate, int edad, String email, String passwords, String photourl, boolean status, Long rolId) {
         this.userId = userId;
         this.nombres = nombres;
         this.apellidos = apellidos;

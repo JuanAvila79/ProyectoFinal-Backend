@@ -7,7 +7,11 @@ package com.backend.aldeamostore.service;
 import com.backend.aldeamostore.converter.userConverter;
 import com.backend.aldeamostore.entity.User;
 import com.backend.aldeamostore.model.MUser;
+import com.backend.aldeamostore.repository.rolRepository;
 import com.backend.aldeamostore.repository.userRepository;
+import java.math.BigInteger;
+import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,8 +31,18 @@ public class userService {
     @Qualifier("UserConverter")
     private userConverter usuarioConverter;
 
+    @Autowired
+    @Qualifier("RolRepository")
+    private rolRepository rolRepository;
+
     public boolean create(MUser user) {
         try {
+            java.util.Calendar calendarHoy = Calendar.getInstance();
+            java.util.Date hoy = calendarHoy.getTime();
+            Timestamp hoySql = new Timestamp(hoy.getTime());
+            System.out.println("La fecha actual es :" + hoy);
+            user.setDateCreate(hoy);
+            user.setStatus(true);
             usuarioRepository.save(usuarioConverter.converterModelToEntity(user));
             return true;
         } catch (Exception e) {
@@ -41,23 +55,23 @@ public class userService {
         try {
             if (usuarioRepository.existsByEmail(user.getEmail())) {
                 User update_User = usuarioRepository.findByEmail(user.getEmail());
-                //update_User.setUserId(user.getUserId());
                 update_User.setNombres(user.getNombres());
                 update_User.setApellidos(user.getApellidos());
                 update_User.setCelular(user.getCelular());
                 update_User.setCountryCode(user.getCountryCode());
                 update_User.setPasswords(user.getPasswords());
                 update_User.setStatus(user.isStatus());
+                update_User.setRolId(user.getRolId());
                 usuarioRepository.save(update_User);
                 user = usuarioConverter.converterEntityToModel(update_User);
                 return user;
             } else {
-                return   usuarioConverter.converterEntityToModel( usuarioRepository.findByEmail(user.getEmail())) ;
+                return usuarioConverter.converterEntityToModel(usuarioRepository.findByEmail(user.getEmail()));
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        
+
         return user;
     }
 
@@ -71,6 +85,7 @@ public class userService {
     }
 
     public List<MUser> listAll() {
+        System.out.println(usuarioRepository.findAll().size());
         return usuarioConverter.converterList(usuarioRepository.findAll());
     }
 
@@ -96,4 +111,11 @@ public class userService {
         }
     }
 
+    public boolean exitsRol(MUser rolid){
+        if(!rolRepository.findById(rolid.getRolId()).isEmpty()){
+            return true;
+        }else{
+                    return false;
+        }
+    }
 }

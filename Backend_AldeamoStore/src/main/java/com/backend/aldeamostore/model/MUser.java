@@ -5,7 +5,6 @@
 package com.backend.aldeamostore.model;
 
 import com.backend.aldeamostore.entity.User;
-import java.math.BigInteger;
 import java.util.Date;
 import lombok.Data;
 import lombok.Getter;
@@ -14,7 +13,6 @@ import lombok.Setter;
 /**
  * @author Juan Carlos Avila Meza / Luz Daleth Lopez Jimenez
  */
-
 @Data
 @Getter
 @Setter
@@ -22,6 +20,7 @@ import lombok.Setter;
 public class MUser {
 
     private Long userId;
+    private Long rolId;
     private String nombres;
     private String apellidos;
     private String celular;
@@ -32,9 +31,24 @@ public class MUser {
     private String passwords;
     private String photourl;
     private boolean status;
-    private BigInteger rolId;
     
+
     public MUser() {
+    }
+
+    public MUser(Long userId, String nombres, String apellidos, String celular, String countryCode, Date dateCreate, int edad, String email, String passwords, String photourl, boolean status, Long rolId) {
+        this.userId = userId;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.celular = celular;
+        this.countryCode = countryCode;
+        this.dateCreate = dateCreate;
+        this.edad = edad;
+        this.email = email;
+        this.passwords = passwords;
+        this.photourl = photourl;
+        this.status = status;
+        this.rolId = rolId;
     }
 
     public MUser(User usuario) {
@@ -52,20 +66,4 @@ public class MUser {
         this.rolId = usuario.getRolId();
     }
 
-    public MUser(Long userId, String nombres, String apellidos, String celular, String countryCode, Date dateCreate, int edad, String email, String passwords, String photourl, boolean status, BigInteger rolId) {
-        this.userId = userId;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.celular = celular;
-        this.countryCode = countryCode;
-        this.dateCreate = dateCreate;
-        this.edad = edad;
-        this.email = email;
-        this.passwords = passwords;
-        this.photourl = photourl;
-        this.status = status;
-        this.rolId = rolId;
-    }
-
-    
 }

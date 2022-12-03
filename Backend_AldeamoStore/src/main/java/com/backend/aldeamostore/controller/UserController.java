@@ -28,7 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/aldeamostore/v1")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin("*")
+//@CrossOrigin(origins = "http://localhost:8080")
 public class UserController {
 
     @Autowired
@@ -36,8 +37,8 @@ public class UserController {
     private userService usuarioService;
 
     // Metodo para Listar todos los usuarios
-    @GetMapping("/user/listAll")
-    public ResponseEntity< List<MUser>> listAll() {
+    @GetMapping("/user/list")
+    public ResponseEntity< List<MUser>> list() {
         List<MUser> listUsers = usuarioService.listAll();
         ResponseEntity<List<MUser>> reponseEntity = new ResponseEntity<>(listUsers, HttpStatus.OK);
         return reponseEntity;
@@ -56,7 +57,7 @@ public class UserController {
 
     // Metodo para eliminar un usuario en particular
     @DeleteMapping("/user/delete/{id}")
-    public ResponseEntity< MUser> deleteUser(@PathVariable("id") Long id) {
+    public ResponseEntity< MUser> delete(@PathVariable("id") Long id) {
         if (!usuarioService.existById(id)) {
             return new ResponseEntity(new Message("Este Id no existe en la base de datos...."), HttpStatus.NOT_FOUND);
         } else {
@@ -67,7 +68,7 @@ public class UserController {
 
     // Metodo para crear un usuario
     @PostMapping("/user/create")
-    public ResponseEntity createUser(@RequestBody MUser user) {
+    public ResponseEntity create(@RequestBody MUser user) {
         if (StringUtils.isBlank(user.getNombres())) {
             return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <-- el Campo Nombres no puede estar Vacio"), HttpStatus.BAD_REQUEST);
         }
@@ -78,7 +79,7 @@ public class UserController {
             return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <-- el Campo Email no puede estar Vacio"), HttpStatus.BAD_REQUEST);
         }
         if (usuarioService.existEmail(user.getEmail())) {
-            return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <--  El email " + user.getEmail() + " ya se ecuentra registrado."), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <--  El Usuario " + user.getEmail() + " ya se ecuentra registrado."), HttpStatus.BAD_REQUEST);
         }
         if (StringUtils.isBlank(user.getCountryCode())) {
             return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <-- el Codigo del Pais no puede estar Vacio"), HttpStatus.BAD_REQUEST);
@@ -88,6 +89,9 @@ public class UserController {
         }
         if (StringUtils.isBlank(user.getPasswords()) || (user.getPasswords().length() < 5) || (user.getPasswords().length() > 15)) {
             return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <-- el Passwords no puede estar Vacio y debe contener entre 5 y 15 caracteres.."), HttpStatus.BAD_REQUEST);
+        }
+        if (!usuarioService.exitsRol(user) ) {
+            return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <-- el codigo del Rol no existe.."), HttpStatus.BAD_REQUEST);
         }
         if (usuarioService.create(user)) {
             return new ResponseEntity(new Message("Usuario Creado Exitosamente"), HttpStatus.CREATED);
@@ -99,11 +103,41 @@ public class UserController {
 
     // Metodo para actualizar un usuario
     @PutMapping("/user/update/")
-    public ResponseEntity<?> updateUser(@RequestBody MUser user) {
+    public ResponseEntity<?> update(@RequestBody MUser user) {
         if (!usuarioService.existEmail(user.getEmail())) {
-            return new ResponseEntity(new Message("El usuario "+user.getEmail() +" ya no existe en la base de datos..."), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new Message("El usuario " + user.getEmail() + " ya no existe en la base de datos..."), HttpStatus.BAD_REQUEST);
         } else {
-           MUser request_update =  usuarioService.update(user);
+        
+        if (StringUtils.isBlank(user.getNombres())) {
+            return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <-- el Campo Nombres no puede estar Vacio"), HttpStatus.BAD_REQUEST);
+        }
+        if (StringUtils.isBlank(user.getApellidos())) {
+            return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <-- el Campo Apellidos no puede estar Vacio"), HttpStatus.BAD_REQUEST);
+        }
+        if (StringUtils.isBlank(user.getCountryCode())) {
+            return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <-- el Codigo del Pais no puede estar Vacio"), HttpStatus.BAD_REQUEST);
+        }
+        if (StringUtils.isBlank(user.getCelular()) || user.getCelular().length() < 9) {
+            return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <-- el Campo Celular no puede ser null o estar Vacio, y debe tener minimo 9 digitos.."), HttpStatus.BAD_REQUEST);
+        }
+        if (StringUtils.isBlank(user.getPasswords()) || (user.getPasswords().length() < 5) || (user.getPasswords().length() > 15)) {
+            return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <-- el Passwords no puede estar Vacio y debe contener entre 5 y 15 caracteres.."), HttpStatus.BAD_REQUEST);
+        }
+        if (!usuarioService.exitsRol(user) ) {
+            return new ResponseEntity(new Message("Error --> " + HttpStatus.BAD_REQUEST + " <-- el codigo del Rol no existe.."), HttpStatus.BAD_REQUEST);
+        }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            MUser request_update = usuarioService.update(user);
             return new ResponseEntity<MUser>(request_update, HttpStatus.OK);
         }
     }
