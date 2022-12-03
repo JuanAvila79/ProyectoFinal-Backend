@@ -4,6 +4,7 @@
  */
 package com.backend.aldeamostore.entity;
 
+import com.backend.aldeamostore.model.MCompra;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,10 +20,17 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Juan Carlos Avila Meza / Luz Daleth Lopez Jimenez
  */
+@Data
+@Setter
+@Getter
+
 @Entity
 @Table(name = "tb_compra", catalog = "db_semillero", schema = "")
 @XmlRootElement
@@ -41,17 +49,21 @@ public class Compra implements Serializable {
     @Basic(optional = false)
     @Column(name = "compra_id", nullable = false)
     private Long compraId;
+
     @Basic(optional = false)
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
+
     @Basic(optional = false)
     @Column(nullable = false)
     private boolean status;
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal total;
+
     @Basic(optional = false)
     @Column(name = "user_id", nullable = false)
     private long userId;
@@ -65,50 +77,19 @@ public class Compra implements Serializable {
 
     public Compra(Long compraId, Date fecha, boolean status, BigDecimal total, long userId) {
         this.compraId = compraId;
+        this.userId = userId;
         this.fecha = fecha;
         this.status = status;
         this.total = total;
-        this.userId = userId;
+        
     }
 
-    public Long getCompraId() {
-        return compraId;
-    }
-
-    public void setCompraId(Long compraId) {
-        this.compraId = compraId;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public Compra(MCompra compra) {
+        this.compraId = compra.getCompraId();
+        this.userId = compra.getUserId();
+        this.fecha = compra.getFecha();
+        this.total = compra.getTotal();
+        this.status = compra.isStatus();
     }
 
     @Override
@@ -135,5 +116,5 @@ public class Compra implements Serializable {
     public String toString() {
         return "com.backend.aldeamostore.entity.Compra[ compraId=" + compraId + " ]";
     }
-    
+
 }
