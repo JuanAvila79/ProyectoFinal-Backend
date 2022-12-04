@@ -29,6 +29,4 @@ public interface userRepository extends JpaRepository<User, Long> {
     public abstract User findByCelular(String celular);
 
     public abstract User findByStatus(boolean status);
-
-    public abstract User findByRolId(Integer rolId);
 }
