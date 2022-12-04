@@ -40,12 +40,12 @@ public class ProductoController {
     private productoService productService;
 
     /**
-     * Metodo List en la Clase ProductController.
+     * método List en la Clase ProductController.
      *
-     * Este Metodo espone una Api de tipo Get, por medio de la URL
+     * Este método expone una Api de tipo Get, por medio de la URL
      * http://localhost:8080/aldeamostore/v1/product/list/, esta URL retorna una
-     * lista JSON con los parametros
-     * (productoId,categoriaId,proveedorId,cantidad,descripcion,descuento,marca,modelo,nombre,precio,status,titulo,image,images)
+     * lista de arreglos JSON con los parámetros
+     * (productoId, categoriaId,proveedorId,cantidad,descripcion,descuento,marca,modelo,nombre,precio,status,titulo,image,images)
      * de todos los productos existentes en la base de datos
      */
     @GetMapping("/product/list")
@@ -56,14 +56,14 @@ public class ProductoController {
     }
 
     /**
-     * Metodo Create en la Clase ProductController.
+     * Método Create en la Clase ProductController.
      *
-     * Este Metodo espone una Api de tipo Post, por medio de la URL
+     * Este método expone una Api de tipo Post, por medio de la URL
      * http://localhost:8080/aldeamostore/v1/product/create/, esta URL recibe
-     * como parametro un JSON con los parametros
-     * (productoId,categoriaId,proveedorId,cantidad,descripcion,descuento,marca,modelo,nombre,precio,status,titulo,image,images),
-     * luego valida cada uno de estos metodos y si pasan el filtro de
-     * validaciones. se procede con la actualizacion.
+     * como parámetro un JSON con los parámetros (productoId,
+     * categoriaId,proveedorId,cantidad,descripcion,descuento,marca,modelo,nombre,precio,status,titulo,image,images),
+     * luego valida cada uno de estos parametros y si pasan el filtro de
+     * validaciones. se procede con la creación del producto.
      */
     @PostMapping("/product/create")
     public ResponseEntity create(@RequestBody MProducto product) {
@@ -117,12 +117,12 @@ public class ProductoController {
     /**
      * Metodo Update en la Clase ProductController.
      *
-     * Este Metodo espone una Api de tipo Put, por medio de la URL
+     * Este Metodo expone una Api de tipo Put, por medio de la URL
      * http://localhost:8080/aldeamostore/v1/product/update/, esta URL recibe
      * como parametro un JSON con los parametros
      * (productoId,categoriaId,proveedorId,cantidad,descripcion,descuento,marca,modelo,nombre,precio,status,titulo,image,images),
-     * luego valida cada uno de estos metodos y si pasan el filtro de
-     * validaciones. se procede con la actualizacion.
+     * luego valida cada uno de estos parametros y si pasan el filtro de
+     * validaciones. se procede con la actualizacion del producto
      */
     @PutMapping("/product/update/")
     public ResponseEntity<?> update(@RequestBody MProducto producto) {
@@ -174,14 +174,14 @@ public class ProductoController {
     }
 
     /**
-     * Metodo Delete en la Clase ProductController.
+     * método Delete en la Clase ProductController.
      *
-     * Este Metodo espone una Api de tipo Delete, por medio de la URL
+     * Este método expone una Api de tipo Delete, por medio de la URL
      * http://localhost:8080/aldeamostore/v1/product/delete/{id}, esta URL
-     * recibe como parametro el ID del producto a eliminar, luego verifica si
-     * este ID existe en la base de datos apoyandose en el metodo findProducto()
-     * de las clase productService, si el resultado de esta validacion es true
-     * (existe), se procede a la eliminacion del producto usando la Metodo
+     * recibe como parámetro el ID del producto a eliminar, luego verifica si
+     * este ID existe en la base de datos apoyándose en el método findProducto()
+     * de la clase productService, si el resultado de esta validación es true
+     * (existe), se procede a la eliminación del producto usando el método
      * delete() de la clase productService
      */
     @DeleteMapping("/product/delete/{id}")
