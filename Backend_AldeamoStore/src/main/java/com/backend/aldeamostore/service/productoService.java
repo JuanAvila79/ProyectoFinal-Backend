@@ -5,6 +5,7 @@
 package com.backend.aldeamostore.service;
 
 import com.backend.aldeamostore.converter.productoConverter;
+import com.backend.aldeamostore.entity.Categoria;
 import com.backend.aldeamostore.entity.Producto;
 import com.backend.aldeamostore.model.MProducto;
 import com.backend.aldeamostore.repository.categotiaRepository;
@@ -58,9 +59,12 @@ public class productoService {
      * MProducto y se apoya en la clase converterModelToEntity para convertir
      * este modelo en una Entidad y poder persistirla en la base de datos.
      */
-    public boolean create(MProducto product) {
+    public boolean create(MProducto producto) {
         try {
-            productRepository.save(productConverter.converterModelToEntity(product));
+            Categoria category = categotiaRepository.findById(producto.getCategoriaId()).get();
+            producto.setCategory(category.getNombre());
+            producto.setStatus(true);
+            productRepository.save(productConverter.converterModelToEntity(producto));
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -80,20 +84,20 @@ public class productoService {
      */
     public MProducto update(MProducto producto) {
         try {
-            if (!productRepository.findById(producto.getProductoId()).isEmpty()) {
-                Producto update_producto = productRepository.findById(producto.getProductoId()).get();
-                update_producto.setProductoId(producto.getProductoId());
+            if (!productRepository.existsById(producto.getId())) {
+                Producto update_producto = productRepository.findById(producto.getId()).get();
+                Categoria categoria = categotiaRepository.findById(producto.getCategoriaId()).get();
+                update_producto.setId(producto.getId());
                 update_producto.setCategoriaId(producto.getCategoriaId());
                 update_producto.setProveedorId(producto.getProveedorId());
-                update_producto.setNombre(producto.getNombre());
-                update_producto.setTitulo(producto.getTitulo());
+                update_producto.setTitle(producto.getTitle());
+                update_producto.setPrice(producto.getPrice());
+                update_producto.setDescription(producto.getDescription());
+                update_producto.setCategory(categoria.getNombre());
                 update_producto.setImage(producto.getImage());
                 update_producto.setImages(producto.getImages());
-                update_producto.setDescripcion(producto.getDescripcion());
-                update_producto.setMarca(producto.getMarca());
-                update_producto.setModelo(producto.getModelo());
-                update_producto.setCantidad(producto.getCantidad());
-                update_producto.setPrecio(producto.getPrecio());
+                update_producto.setCount(producto.getCount());
+                update_producto.setRate(producto.getRate());
                 update_producto.setDescuento(producto.getDescuento());
                 update_producto.setStatus(producto.isStatus());
                 productRepository.save(update_producto);

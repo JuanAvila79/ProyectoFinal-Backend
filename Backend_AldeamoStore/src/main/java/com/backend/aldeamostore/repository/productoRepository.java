@@ -16,16 +16,8 @@ import org.springframework.stereotype.Repository;
 public interface productoRepository extends JpaRepository<Producto, Long> {
 
     @Override
-    public abstract Optional<Producto> findById(Long productoId);
-    
-    public abstract Producto findByMarca(String marca);
-
-    public abstract Producto findByModelo(String modelo);
-
-    public abstract Producto findByNombre(String nombre);
-
-    public abstract Producto findByTitulo(String titulo);
-    
+    public abstract Optional<Producto> findById(Long Id);
+      
     public abstract boolean  existsByCategoriaId(Long categoriaId);
     
     public abstract boolean existsByProveedorId(int proveedorId);

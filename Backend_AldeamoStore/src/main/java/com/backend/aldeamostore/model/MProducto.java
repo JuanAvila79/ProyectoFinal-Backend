@@ -17,57 +17,53 @@ import lombok.Setter;
 @Setter
 public class MProducto {
 
-    private Long productoId;
-    private long categoriaId;
-    private long proveedorId;
-    private int cantidad;
-    private String descripcion;
-    private Float descuento;
-    private String marca;
-    private String modelo;
-    private String nombre;
-    private Float precio;
-    private boolean status;
-    private String titulo;
+    private Long Id;
+    private Long categoriaId;
+    private Long proveedorId;
+    private String title;
+    private float price;
+    private String description;
+    private String category;
     private String image;
     private String images;
+    private int count;
+    private float rate;
+    private Float descuento;
+    private boolean status;
 
     public MProducto() {
     }
 
-    public MProducto(Long productoId, long categoriaId, long proveedorId, int cantidad, String descripcion, Float descuento, String marca, String modelo, String nombre, Float precio, boolean status, String titulo, String image, String images) {
-        this.productoId = productoId;
+    public MProducto(Long Id, Long categoriaId, Long proveedorId, String title, float price, String description, String category, String image, String images, int count, float rate, Float descuento, boolean status) {
+        this.Id = Id;
         this.categoriaId = categoriaId;
         this.proveedorId = proveedorId;
-        this.nombre = nombre;
-        this.titulo = titulo;
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.category = category;
         this.image = image;
         this.images = images;
-        this.descripcion = descripcion;
-        this.cantidad = cantidad;
+        this.count = count;
+        this.rate = rate;
         this.descuento = descuento;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.precio = precio;
         this.status = status;
     }
 
-    public MProducto(Producto producto) {
-        this.productoId = producto.getProductoId();
-        this.categoriaId = producto.getCategoriaId();
-        this.proveedorId = producto.getProveedorId();
-        this.cantidad = producto.getCantidad();
-        this.descripcion = producto.getDescripcion();
-        this.descuento = producto.getDescuento();
-        this.marca = producto.getMarca();
-        this.modelo = producto.getModelo();
-        this.nombre = producto.getNombre();
-        this.precio = producto.getPrecio();
-        this.status = producto.isStatus();
-        this.titulo = producto.getTitulo();
-        this.image = producto.getImage();
-        this.images = producto.getImages();
-
+    public MProducto(Producto entity_product) {
+        this.Id = entity_product.getId();
+        this.categoriaId = entity_product.getCategoriaId();
+        this.proveedorId = entity_product.getProveedorId();
+        this.title = entity_product.getTitle();
+        this.price = entity_product.getPrice();
+        this.description = entity_product.getDescription();
+        this.category = entity_product.getCategory();
+        this.image = entity_product.getImage();
+        this.images = entity_product.getImages();
+        this.count = entity_product.getCount();
+        this.rate = entity_product.getRate();
+        this.descuento = entity_product.getDescuento();
+        this.status = entity_product.isStatus();
     }
-    
+
 }

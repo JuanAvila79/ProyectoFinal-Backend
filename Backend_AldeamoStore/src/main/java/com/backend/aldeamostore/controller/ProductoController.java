@@ -73,10 +73,8 @@ public class ProductoController {
         if (!productService.findProveedor(product)) {
             return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_FOUND + " ==>  el proveedor con codigo (" + product.getProveedorId() + "), no se econtro en la base d datos.."), HttpStatus.NOT_FOUND);
         }
-        if (StringUtils.isAllBlank(product.getNombre()) || StringUtils.isAllEmpty(product.getNombre())) {
-            return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  la propiedad Nombre, no puede estas vacia."), HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (StringUtils.isAllBlank(product.getTitulo()) || StringUtils.isAllEmpty(product.getTitulo())) {
+
+        if (StringUtils.isAllBlank(product.getTitle()) || StringUtils.isAllEmpty(product.getTitle())) {
             return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  la propiedad Titulo, no puede estas vacia."), HttpStatus.NOT_ACCEPTABLE);
         }
         if (StringUtils.isAllBlank(product.getImage()) || StringUtils.isAllEmpty(product.getImage())) {
@@ -85,19 +83,13 @@ public class ProductoController {
         if (StringUtils.isAllBlank(product.getImages()) || StringUtils.isAllEmpty(product.getImages())) {
             return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  la propiedad Imagenes, no puede estas vacia."), HttpStatus.NOT_ACCEPTABLE);
         }
-        if (StringUtils.isAllBlank(product.getDescripcion()) || StringUtils.isAllEmpty(product.getDescripcion())) {
+        if (StringUtils.isAllBlank(product.getDescription()) || StringUtils.isAllEmpty(product.getDescription())) {
             return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  la propiedad Descripcion, no puede estas vacia."), HttpStatus.NOT_ACCEPTABLE);
         }
-        if (StringUtils.isAllBlank(product.getMarca()) || StringUtils.isAllEmpty(product.getMarca())) {
-            return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  la propiedad Marca, no puede estas vacia."), HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (StringUtils.isAllBlank(product.getModelo()) || StringUtils.isAllEmpty(product.getModelo())) {
-            return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  la propiedad Modelo, no puede estas vacia."), HttpStatus.NOT_ACCEPTABLE);
-        }
-        if (product.getCantidad() <= 0) {
+        if (product.getCount()<= 0) {
             return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  el stock inicial del producto no puede ser cero.."), HttpStatus.NOT_ACCEPTABLE);
         }
-        if (product.getPrecio() <= 0) {
+        if (product.getPrice()<= 0) {
             return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  debe ingresar almenos una precio.."), HttpStatus.NOT_ACCEPTABLE);
         }
         if (product.getDescuento() < 0 || product.getDescuento().toString().isBlank()) {
@@ -126,8 +118,8 @@ public class ProductoController {
      */
     @PutMapping("/product/update/")
     public ResponseEntity<?> update(@RequestBody MProducto producto) {
-        if (!productService.findProducto(producto.getProductoId())) {
-            return new ResponseEntity(new Message("El codigo del producto <== " + producto.getProductoId() + " ==> no se encontro en la base de datos..."), HttpStatus.NOT_FOUND);
+        if (!productService.findProducto(producto.getId())) {
+            return new ResponseEntity(new Message("El codigo del producto <== " + producto.getId() + " ==> no se encontro en la base de datos..."), HttpStatus.NOT_FOUND);
         } else {
             if (!productService.findCategoria(producto)) {
                 return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_FOUND + " ==>  la categoria con codigo <== " + producto.getCategoriaId() + " ==>, no se encontro en la base de datos.."), HttpStatus.NOT_FOUND);
@@ -135,10 +127,10 @@ public class ProductoController {
             if (!productService.findProveedor(producto)) {
                 return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_FOUND + " ==>  el proveedor con codigo <==" + producto.getProveedorId() + " ==>, no se encontro en la base de datos.."), HttpStatus.NOT_FOUND);
             }
-            if (StringUtils.isAllBlank(producto.getNombre()) || StringUtils.isAllEmpty(producto.getNombre())) {
+            if (StringUtils.isAllBlank(producto.getCategory()) || StringUtils.isAllEmpty(producto.getCategory())) {
                 return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  la propiedad Nombre, no puede estas vacia."), HttpStatus.NOT_ACCEPTABLE);
             }
-            if (StringUtils.isAllBlank(producto.getTitulo()) || StringUtils.isAllEmpty(producto.getTitulo())) {
+            if (StringUtils.isAllBlank(producto.getTitle()) || StringUtils.isAllEmpty(producto.getTitle())) {
                 return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  la propiedad Titulo, no puede estas vacia."), HttpStatus.NOT_ACCEPTABLE);
             }
             if (StringUtils.isAllBlank(producto.getImage()) || StringUtils.isAllEmpty(producto.getImage())) {
@@ -147,19 +139,13 @@ public class ProductoController {
             if (StringUtils.isAllBlank(producto.getImages()) || StringUtils.isAllEmpty(producto.getImages())) {
                 return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  la propiedad Imagenes, no puede estas vacia."), HttpStatus.NOT_ACCEPTABLE);
             }
-            if (StringUtils.isAllBlank(producto.getDescripcion()) || StringUtils.isAllEmpty(producto.getDescripcion())) {
+            if (StringUtils.isAllBlank(producto.getDescription()) || StringUtils.isAllEmpty(producto.getDescription())) {
                 return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  la propiedad Descripcion, no puede estas vacia."), HttpStatus.NOT_ACCEPTABLE);
             }
-            if (StringUtils.isAllBlank(producto.getMarca()) || StringUtils.isAllEmpty(producto.getMarca())) {
-                return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  la propiedad Marca, no puede estas vacia."), HttpStatus.NOT_ACCEPTABLE);
-            }
-            if (StringUtils.isAllBlank(producto.getModelo()) || StringUtils.isAllEmpty(producto.getModelo())) {
-                return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  la propiedad Modelo, no puede estas vacia."), HttpStatus.NOT_ACCEPTABLE);
-            }
-            if (producto.getCantidad() <= 0) {
+            if (producto.getCount()<= 0) {
                 return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  el stock inicial del producto no puede ser cero.."), HttpStatus.NOT_ACCEPTABLE);
             }
-            if (producto.getPrecio() <= 0) {
+            if (producto.getPrice()<= 0) {
                 return new ResponseEntity(new Message("Error <== " + HttpStatus.NOT_ACCEPTABLE + " ==>  debe ingresar almenos una precio.."), HttpStatus.NOT_ACCEPTABLE);
             }
             if (producto.getDescuento() < 0 || producto.getDescuento().toString().isBlank()) {
