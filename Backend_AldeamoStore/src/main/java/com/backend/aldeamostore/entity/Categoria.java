@@ -4,6 +4,7 @@
  */
 package com.backend.aldeamostore.entity;
 
+import com.backend.aldeamostore.model.MCategoria;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,10 +16,17 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Juan Carlos Avila Meza / Luz Daleth Lopez Jimenez
  */
+@Data
+@Setter
+@Getter
+
 @Entity
 @Table(name = "tb_categoria", catalog = "db_semillero", schema = "")
 @XmlRootElement
@@ -35,9 +43,11 @@ public class Categoria implements Serializable {
     @Basic(optional = false)
     @Column(name = "categoria_id", nullable = false)
     private Long categoriaId;
+
     @Basic(optional = false)
     @Column(nullable = false, length = 70)
     private String nombre;
+
     @Basic(optional = false)
     @Column(nullable = false)
     private boolean status;
@@ -55,28 +65,10 @@ public class Categoria implements Serializable {
         this.status = status;
     }
 
-    public Long getCategoriaId() {
-        return categoriaId;
-    }
-
-    public void setCategoriaId(Long categoriaId) {
-        this.categoriaId = categoriaId;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public Categoria(MCategoria categoria) {
+        this.categoriaId = categoria.getCategoriaId();
+        this.nombre = categoria.getNombre();
+        this.status = categoria.isStatus();
     }
 
     @Override
@@ -103,5 +95,5 @@ public class Categoria implements Serializable {
     public String toString() {
         return "com.backend.aldeamostore.entity.Categoria[ categoriaId=" + categoriaId + " ]";
     }
-    
+
 }
