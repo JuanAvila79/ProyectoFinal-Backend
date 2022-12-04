@@ -4,6 +4,7 @@
  */
 package com.backend.aldeamostore.entity;
 
+import com.backend.aldeamostore.model.MAddres;
 import java.io.Serializable;
 import java.math.BigInteger;
 import javax.persistence.Basic;
@@ -16,10 +17,17 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Juan Carlos Avila Meza / Luz Daleth Lopez Jimenez
  */
+@Data
+@Getter
+@Setter
+
 @Entity
 @Table(name = "tb_addres", catalog = "db_semillero", schema = "")
 @XmlRootElement
@@ -37,27 +45,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Addres implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "direccion_id", nullable = false)
     private Long direccionId;
-    @Column(length = 100)
-    private String apartamento;
-    @Column(length = 100)
-    private String casa;
-    @Column(length = 100)
-    private String ciudad;
-    @Column(length = 100)
-    private String departamento;
-    @Column(length = 200)
-    private String direccion;
-    @Column(length = 100)
-    private String municipio;
-    @Column(length = 100)
-    private String pais;
+
     @Column(name = "user_id")
     private BigInteger userId;
+
+    @Column(length = 100)
+    private String apartamento;
+
+    @Column(length = 100)
+    private String casa;
+
+    @Column(length = 100)
+    private String ciudad;
+
+    @Column(length = 100)
+    private String departamento;
+
+    @Column(length = 200)
+    private String direccion;
+
+    @Column(length = 100)
+    private String municipio;
+
+    @Column(length = 100)
+    private String pais;
 
     public Addres() {
     }
@@ -66,76 +83,28 @@ public class Addres implements Serializable {
         this.direccionId = direccionId;
     }
 
-    public Long getDireccionId() {
-        return direccionId;
-    }
-
-    public void setDireccionId(Long direccionId) {
+    public Addres(Long direccionId, BigInteger userId, String apartamento, String casa, String ciudad, String departamento, String direccion, String municipio, String pais) {
         this.direccionId = direccionId;
-    }
-
-    public String getApartamento() {
-        return apartamento;
-    }
-
-    public void setApartamento(String apartamento) {
         this.apartamento = apartamento;
-    }
-
-    public String getCasa() {
-        return casa;
-    }
-
-    public void setCasa(String casa) {
         this.casa = casa;
-    }
-
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
-    }
-
-    public String getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(String departamento) {
         this.departamento = departamento;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public String getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(String municipio) {
         this.municipio = municipio;
-    }
-
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
         this.pais = pais;
-    }
-
-    public BigInteger getUserId() {
-        return userId;
-    }
-
-    public void setUserId(BigInteger userId) {
         this.userId = userId;
+    }
+
+    public Addres(MAddres addres) {
+        this.direccionId = addres.getDireccionId();
+        this.userId = addres.getUserId();
+        this.apartamento = addres.getApartamento();
+        this.casa = addres.getCasa();
+        this.ciudad = addres.getCiudad();
+        this.departamento = addres.getApartamento();
+        this.direccion = addres.getDireccion();
+        this.municipio = addres.getMunicipio();
+        this.pais = addres.getPais();
     }
 
     @Override
@@ -162,5 +131,5 @@ public class Addres implements Serializable {
     public String toString() {
         return "com.backend.aldeamostore.entity.Addres[ direccionId=" + direccionId + " ]";
     }
-    
+
 }
