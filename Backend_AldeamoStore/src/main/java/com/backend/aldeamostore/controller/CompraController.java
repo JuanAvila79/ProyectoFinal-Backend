@@ -36,25 +36,6 @@ public class CompraController {
     @Qualifier("CompraService")
     private compraService compraService;
 
-    // Metodo para Listar todos los usuarios
-    @GetMapping("/compras/list")
-    public ResponseEntity< List<MCompra>> list() {
-        List<MCompra> list_compras = compraService.getList();
-        ResponseEntity<List<MCompra>> reponseEntity = new ResponseEntity<>(list_compras, HttpStatus.OK);
-        return reponseEntity;
-    }
-
-    // Metodo para eliminar un usuario en particular
-    @DeleteMapping("/compras/delete/{id}")
-    public ResponseEntity< MCompra> delete(@PathVariable("id") Long id) {
-        if (!compraService.existById(id)) {
-            return new ResponseEntity(new Message("El codigo de la compra no existe en la base de datos...."), HttpStatus.NOT_FOUND);
-        } else {
-            compraService.delete(id);
-            return new ResponseEntity(new Message("compra eliminada con exito.."), HttpStatus.OK);
-        }
-    }
-
     // Metodo para crear un usuario
     @PostMapping("/compras/create")
     public ResponseEntity create(@RequestBody MCompra compra) {
@@ -70,6 +51,14 @@ public class CompraController {
             return new ResponseEntity(new Message("Compra no registrada, se ha presentado un error."), HttpStatus.CONFLICT);
         }
 
+    }
+
+    // Metodo para Listar todos los usuarios
+    @GetMapping("/compras/list")
+    public ResponseEntity< List<MCompra>> list() {
+        List<MCompra> list_compras = compraService.getList();
+        ResponseEntity<List<MCompra>> reponseEntity = new ResponseEntity<>(list_compras, HttpStatus.OK);
+        return reponseEntity;
     }
 
     // Metodo para crear un usuario
@@ -90,6 +79,17 @@ public class CompraController {
             return new ResponseEntity(new Message("Compra No actualizada"), HttpStatus.CONFLICT);
         }
 
+    }
+
+    // Metodo para eliminar un usuario en particular
+    @DeleteMapping("/compras/delete/{id}")
+    public ResponseEntity< MCompra> delete(@PathVariable("id") Long id) {
+        if (!compraService.existById(id)) {
+            return new ResponseEntity(new Message("El codigo de la compra no existe en la base de datos...."), HttpStatus.NOT_FOUND);
+        } else {
+            compraService.delete(id);
+            return new ResponseEntity(new Message("compra eliminada con exito.."), HttpStatus.OK);
+        }
     }
 
 }
