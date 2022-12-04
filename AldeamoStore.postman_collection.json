@@ -1,0 +1,890 @@
+{
+	"info": {
+		"_postman_id": "49603ab0-9b64-43df-b89e-9cb6cb95250f",
+		"name": "AldeamoStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12872500"
+	},
+	"item": [
+		{
+			"name": "Apis Usuario",
+			"item": [
+				{
+					"name": "Create_user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"nombres\": \"Usuario2\",\r\n\"apellidos\": \"Apellido2\",\r\n\"edad\":43,\r\n\"email\": \"test222@aldeamo.com\",\r\n\"photourl\":\"https://supertechman.com.au/wp-content/uploads/2019/01/user-management.jpg\",\r\n\"countryCode\": \"57\",\r\n\"celular\": \"3007699485\",\r\n\"passwords\": \"123456\",\r\n\"rolId\":3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/user/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List_User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/user/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"user",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/user/findByEmail/test2@aldeamo.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"user",
+								"findByEmail",
+								"test2@aldeamo.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update_User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"nombres\": \"Test Usuario Update2\",\r\n\"apellidos\": \"Test Apellido Update2\",\r\n\"edad\":20,\r\n\"email\":\"test2@aldeamo.com\",\r\n\"photourl\": \"https://supertechman.com.au/wp-content/uploads/2019/01/user-management.jpg\",\r\n\"countryCode\": \"57\",\r\n\"celular\": \"3007249955\",\r\n\"passwords\": \"123456789\",\r\n\"status\": true,\r\n\"rolId\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/user/update/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"user",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/user/delete/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"user",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Apis Rol",
+			"item": [
+				{
+					"name": "Create_Rol",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"descripcion\": \"Administrador\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/rol/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"rol",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List_Rol",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/rol/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"rol",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rol_update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"rolId\": 1,\r\n        \"descripcion\": \"Usuario\",\r\n        \"status\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/rol/update/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"rol",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rol_delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/rol/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"rol",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Apis Compras",
+			"item": [
+				{
+					"name": "Apis Detalle Compras",
+					"item": [
+						{
+							"name": "Detallecompra_Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "    {\r\n        \"compraId\": 3,\r\n        \"productoId\": 6,\r\n        \"cantidad\": 2,\r\n        \"monto\": 2000000,\r\n        \"iva\": 0.19,\r\n        \"descuento\": 0.00,\r\n        \"total\":2180000\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/aldeamostore/v1/detallecompra/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"aldeamostore",
+										"v1",
+										"detallecompra",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DetalleCompra_List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/aldeamostore/v1/detallecompra/list",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"aldeamostore",
+										"v1",
+										"detallecompra",
+										"list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detallecompra_Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"idDetalleCompra\": 1,\r\n        \"compraId\": 2,\r\n        \"productoId\": 6,\r\n        \"cantidad\": 3,\r\n        \"monto\": 425.00,\r\n        \"iva\": 0.19,\r\n        \"descuento\": 0.00,\r\n        \"total\": 1275000.00\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/aldeamostore/v1/detallecompra/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"aldeamostore",
+										"v1",
+										"detallecompra",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detallecompra_delete",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/aldeamostore/v1/detallecompra/delete/9",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"aldeamostore",
+										"v1",
+										"detallecompra",
+										"delete",
+										"9"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Compra_Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"userId\": 4,\r\n        \"total\": 10000\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/compras/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"compras",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compras_Lists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/compras/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"compras",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compra_Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"compraId\": 3,\r\n        \"userId\": 1,\r\n        \"status\": null,\r\n        \"total\": 1\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/compras/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"compras",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Compra_Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/compras/delete/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"compras",
+								"delete",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Apis Products",
+			"item": [
+				{
+					"name": "product_create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"categoriaId\" : 1,\r\n        \"proveedorId\" :1,\r\n        \"title\" : \"WD 2TB Elements Portable External Hard Drive - USB 3.0 \",\r\n        \"price\" :  64,\r\n        \"description\" :\"USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on users hardware configuration and operating system\",\r\n\r\n        \"image\" : \"https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg\",\r\n        \"images\" :\"https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg\",\r\n        \"count\" :203,\r\n        \"rate\" : 3.3,\r\n        \"descuento\" :0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/product/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"product",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products_List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/product/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"product",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product_Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"productoId\": 6,\r\n        \"categoriaId\": 0,\r\n        \"proveedorId\": 6,\r\n        \"cantidad\": 10,\r\n        \"descripcion\": \"Procesador Core i7 Decima generación, 8 nucleos, memoria cache L8,\",\r\n        \"descuento\": 0.0,\r\n        \"marca\": \"Intel\",\r\n        \"modelo\": \"Octacore\",\r\n        \"nombre\": \"Octacore  39483\",\r\n        \"precio\": 2000000.0,\r\n        \"status\": true,\r\n        \"titulo\": \"Procesador Intel Core i7\",\r\n        \"image\": \"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSjFLxNQmaJj-qCzqqH4zkYqxhpVvHV0zqgoN2gLpOAdMhF_6cQFOa40cf4peXZRIXE9WqAHJxOUA&usqp=CAc\",\r\n        \"images\": \"https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSjFLxNQmaJj-qCzqqH4zkYqxhpVvHV0zqgoN2gLpOAdMhF_6cQFOa40cf4peXZRIXE9WqAHJxOUA&usqp=CAc\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/product/update/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"product",
+								"update",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Producto_Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/product/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"product",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Apis Categoria",
+			"item": [
+				{
+					"name": "Categoria_Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"nombre\": \"Camaras y Accesorios\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/categoria/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"categoria",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categoria_List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/categoria/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"categoria",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categoria_Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"categoriaId\": 17,\r\n        \"nombre\": \"Mini Tablets\",\r\n        \"status\": true\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/categoria/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"categoria",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categoria_Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/categoria/delete/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"categoria",
+								"delete",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Apis Proveedor",
+			"item": [
+				{
+					"name": "Proveedor_Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"celular\":3007548822,\r\n        \"direccion\": \"Direccion de Mercado Libre\",\r\n        \"nombre\": \"Mercado Libre Colombia\",\r\n        \"rut\": \"J-123456789\",\r\n        \"status\": true,\r\n        \"web\": \"www.mercadolibre.com.com\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/proveedor/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"proveedor",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Proveedor_List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/proveedor/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"proveedor",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Proveedor_Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"proveedorId\":1,\r\n        \"celular\":3005128899,\r\n        \"direccion\": \"Direccion del proveedor 1\",\r\n        \"nombre\": \"Proveedor No. 2\",\r\n        \"rut\": \"J-2158246228\",\r\n        \"status\": true,\r\n        \"web\": \"www.pagina_proveedor1.com\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/proveedor/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"proveedor",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Proveedor_Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/proveedor/delete/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"proveedor",
+								"delete",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Apis Nitificaciones",
+			"item": [
+				{
+					"name": "Notificacion_Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"tipoNotificacionId\":1,\r\n        \"canalId\": 1,\r\n        \"userId\": 2,\r\n        \"asunto\": \"Tercer Registo de Usuario\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/notificacion/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"notificacion",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notificacion_List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"notificacionId\": 5,\r\n        \"tipoNotificacionId\": 1,\r\n        \"canalId\": 1,\r\n        \"userId\": 2,\r\n        \"asunto\": \"Segundo Registo de Usuario\",\r\n        \"status\": false\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/aldeamostore/v1/notificacion/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"aldeamostore",
+								"v1",
+								"notificacion",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
