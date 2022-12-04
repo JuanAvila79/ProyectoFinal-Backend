@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/aldeamostore/v1")
 @CrossOrigin(origins = "*")
 //@CrossOrigin(origins = "http://localhost:8080")
-public class proveedorController {
+public class ProveedorController {
 
     @Autowired
     @Qualifier("ProveedorService")
