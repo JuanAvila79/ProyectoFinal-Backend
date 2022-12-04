@@ -4,6 +4,7 @@
  */
 package com.backend.aldeamostore.entity;
 
+import com.backend.aldeamostore.model.MProveedor;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,10 +16,18 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Juan Carlos Avila Meza / Luz Daleth Lopez Jimenez
  */
+
+@Data
+@Setter
+@Getter
+
 @Entity
 @Table(name = "tb_proveedor", catalog = "db_semillero", schema = "")
 @XmlRootElement
@@ -38,33 +47,39 @@ public class Proveedor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "proveedor_id", nullable = false)
-    private Integer proveedorId;
+    private Long proveedorId;
+
     @Basic(optional = false)
     @Column(nullable = false)
     private long celular;
+
     @Basic(optional = false)
     @Column(nullable = false, length = 250)
     private String direccion;
+
     @Basic(optional = false)
     @Column(nullable = false, length = 70)
     private String nombre;
+
     @Basic(optional = false)
     @Column(nullable = false, length = 50)
     private String rut;
+
     @Basic(optional = false)
     @Column(nullable = false)
     private boolean status;
+
     @Column(length = 250)
     private String web;
 
     public Proveedor() {
     }
 
-    public Proveedor(Integer proveedorId) {
+    public Proveedor(Long proveedorId) {
         this.proveedorId = proveedorId;
     }
 
-    public Proveedor(Integer proveedorId, long celular, String direccion, String nombre, String rut, boolean status) {
+    public Proveedor(Long proveedorId, long celular, String direccion, String nombre, String rut, boolean status) {
         this.proveedorId = proveedorId;
         this.celular = celular;
         this.direccion = direccion;
@@ -73,60 +88,14 @@ public class Proveedor implements Serializable {
         this.status = status;
     }
 
-    public Integer getProveedorId() {
-        return proveedorId;
-    }
-
-    public void setProveedorId(Integer proveedorId) {
-        this.proveedorId = proveedorId;
-    }
-
-    public long getCelular() {
-        return celular;
-    }
-
-    public void setCelular(long celular) {
-        this.celular = celular;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getRut() {
-        return rut;
-    }
-
-    public void setRut(String rut) {
-        this.rut = rut;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public String getWeb() {
-        return web;
-    }
-
-    public void setWeb(String web) {
-        this.web = web;
+    public Proveedor(MProveedor proveedor) {
+        this.proveedorId = proveedor.getProveedorId();
+        this.celular = proveedor.getCelular();
+        this.direccion = proveedor.getDireccion();
+        this.nombre = proveedor.getNombre();
+        this.rut = proveedor.getRut();
+        this.web = proveedor.getWeb();
+        this.status = proveedor.isStatus();
     }
 
     @Override
@@ -153,5 +122,5 @@ public class Proveedor implements Serializable {
     public String toString() {
         return "com.backend.aldeamostore.entity.Proveedor[ proveedorId=" + proveedorId + " ]";
     }
-    
+
 }

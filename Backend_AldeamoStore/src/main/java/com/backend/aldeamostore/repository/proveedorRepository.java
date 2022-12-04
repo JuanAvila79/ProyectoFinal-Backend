@@ -9,11 +9,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- *
- * @author Juan Carlos Avila Meza
+ * @author Juan Carlos Avila Meza / Luz Daleth Lopez Jimenez
  */
 
 @Repository("ProveedorRepository")
 public interface proveedorRepository extends JpaRepository<Proveedor, Long> {
+    
+    public abstract boolean existsByNombre(String nombre);
     
 }
