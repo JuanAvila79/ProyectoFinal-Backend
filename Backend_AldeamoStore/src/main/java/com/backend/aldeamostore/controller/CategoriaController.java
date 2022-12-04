@@ -5,7 +5,6 @@
 package com.backend.aldeamostore.controller;
 
 import com.backend.aldeamostore.model.MCategoria;
-import com.backend.aldeamostore.model.MProducto;
 import com.backend.aldeamostore.model.Message;
 import com.backend.aldeamostore.service.categoriaService;
 import java.util.List;
