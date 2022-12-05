@@ -4,6 +4,7 @@
  */
 package com.backend.aldeamostore.entity;
 
+import com.backend.aldeamostore.model.MDetalleNotificacion;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -19,10 +20,17 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Juan Carlos Avila Meza / Luz Daleth Lopez Jimenez
  */
+@Data
+@Getter
+@Setter
+
 @Entity
 @Table(name = "tb_detalle_notificacion", catalog = "db_semillero", schema = "")
 @XmlRootElement
@@ -34,19 +42,23 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class DetalleNotificacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_detalle_notificacion", nullable = false)
     private Long idDetalleNotificacion;
+
     @Basic(optional = false)
     @Lob
     @Column(nullable = false, length = 2147483647)
     private String contenido;
+
     @Basic(optional = false)
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
+
     @Basic(optional = false)
     @Column(name = "notificacion_id", nullable = false)
     private int notificacionId;
@@ -65,36 +77,12 @@ public class DetalleNotificacion implements Serializable {
         this.notificacionId = notificacionId;
     }
 
-    public Long getIdDetalleNotificacion() {
-        return idDetalleNotificacion;
-    }
+    public DetalleNotificacion(MDetalleNotificacion detalle_notificacion) {
+        this.idDetalleNotificacion = detalle_notificacion.getIdDetalleNotificacion();
+        this.notificacionId = detalle_notificacion.getNotificacionId();
+        this.fecha = detalle_notificacion.getFecha();
+        this.contenido = detalle_notificacion.getContenido();
 
-    public void setIdDetalleNotificacion(Long idDetalleNotificacion) {
-        this.idDetalleNotificacion = idDetalleNotificacion;
-    }
-
-    public String getContenido() {
-        return contenido;
-    }
-
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public int getNotificacionId() {
-        return notificacionId;
-    }
-
-    public void setNotificacionId(int notificacionId) {
-        this.notificacionId = notificacionId;
     }
 
     @Override
@@ -121,5 +109,5 @@ public class DetalleNotificacion implements Serializable {
     public String toString() {
         return "com.backend.aldeamostore.entity.DetalleNotificacion[ idDetalleNotificacion=" + idDetalleNotificacion + " ]";
     }
-    
+
 }

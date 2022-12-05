@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/aldeamostore/v1")
-@CrossOrigin(origins = "*")
+@CrossOrigin("*")
 //@CrossOrigin(origins = "http://localhost:8080")
 public class ProductoController {
 

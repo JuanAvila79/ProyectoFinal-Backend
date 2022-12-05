@@ -4,6 +4,7 @@
  */
 package com.backend.aldeamostore.entity;
 
+import com.backend.aldeamostore.model.MCanal;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,10 +16,17 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Juan Carlos Avila Meza / Luz Daleth Lopez Jimenez
  */
+@Data
+@Getter
+@Setter
+
 @Entity
 @Table(name = "tb_canal", catalog = "db_semillero", schema = "")
 @XmlRootElement
@@ -35,9 +43,11 @@ public class Canal implements Serializable {
     @Basic(optional = false)
     @Column(name = "canal_id", nullable = false)
     private Integer canalId;
+
     @Basic(optional = false)
     @Column(nullable = false, length = 20)
     private String descripcion;
+
     @Basic(optional = false)
     @Column(nullable = false)
     private boolean status;
@@ -55,28 +65,10 @@ public class Canal implements Serializable {
         this.status = status;
     }
 
-    public Integer getCanalId() {
-        return canalId;
-    }
-
-    public void setCanalId(Integer canalId) {
-        this.canalId = canalId;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public Canal(MCanal canal) {
+        this.canalId = canal.getCanalId();
+        this.descripcion = canal.getDescripcion();
+        this.status = canal.isStatus();
     }
 
     @Override
@@ -103,5 +95,5 @@ public class Canal implements Serializable {
     public String toString() {
         return "com.backend.aldeamostore.entity.Canal[ canalId=" + canalId + " ]";
     }
-    
+
 }

@@ -4,6 +4,7 @@
  */
 package com.backend.aldeamostore.entity;
 
+import com.backend.aldeamostore.model.MTipoNotificacion;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -15,10 +16,17 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author Juan Carlos Avila Meza / Luz Daleth Lopez Jimenez
  */
+@Data
+@Setter
+@Getter
+
 @Entity
 @Table(name = "tb_tipo_notificacion", catalog = "db_semillero", schema = "")
 @XmlRootElement
@@ -35,9 +43,11 @@ public class TipoNotificacion implements Serializable {
     @Basic(optional = false)
     @Column(name = "tipo_notificacion_id", nullable = false)
     private Long tipoNotificacionId;
+
     @Basic(optional = false)
     @Column(nullable = false, length = 70)
     private String descripcion;
+
     @Basic(optional = false)
     @Column(nullable = false)
     private boolean status;
@@ -55,28 +65,10 @@ public class TipoNotificacion implements Serializable {
         this.status = status;
     }
 
-    public Long getTipoNotificacionId() {
-        return tipoNotificacionId;
-    }
-
-    public void setTipoNotificacionId(Long tipoNotificacionId) {
-        this.tipoNotificacionId = tipoNotificacionId;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
+    public TipoNotificacion(MTipoNotificacion tipo_notificacion) {
+        this.tipoNotificacionId = tipo_notificacion.getTipoNotificacionId();
+        this.descripcion = tipo_notificacion.getDescripcion();
+        this.status = tipo_notificacion.isStatus();
     }
 
     @Override
@@ -103,5 +95,5 @@ public class TipoNotificacion implements Serializable {
     public String toString() {
         return "com.backend.aldeamostore.entity.TipoNotificacion[ tipoNotificacionId=" + tipoNotificacionId + " ]";
     }
-    
+
 }
